@@ -1,18 +1,24 @@
 'use client';
 
-import { useTranslations, useLocale } from 'next-intl';
+import { useTranslations } from 'next-intl';
 import { usePathname } from '@/i18n/routing';
 import { Link } from '@/i18n/routing';
+import { useParams } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
 import { useEffect, useState } from 'react';
 import type { User } from '@supabase/supabase-js';
 import { cn } from '@/lib/utils';
-import { Menu, X, Globe } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
+
+const VALID_LOCALES = ['en', 'el', 'it', 'zh', 'bg', 'tr'];
 
 export function Header() {
   const t = useTranslations('common');
   const pathname = usePathname();
-  const locale = useLocale();
+  const params = useParams();
+  const locale = (params?.locale as string) && VALID_LOCALES.includes(params.locale as string)
+    ? (params.locale as string)
+    : 'en';
   const [user, setUser] = useState<User | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const supabase = createClient();

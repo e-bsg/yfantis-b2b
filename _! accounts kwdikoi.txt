@@ -1,0 +1,4 @@
+Role	Email	Password	Access
+Super Admin (you)	admin@yfantis.com	Admin123!@#	/admin dashboard + moderation
+Demo companies (11)	factory1.ellinika@demo-b2b.gr through veneto4@demo.com	Demo1234!	Normal user, can post listings
+Demo (simple names)	danube2@demo.com, marble1@demo.com, chengdu3@demo.com	Demo1234!	Normal user
