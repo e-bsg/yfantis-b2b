@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 
+import { Analytics } from '@vercel/analytics/next';
 import { NextIntlClientProvider } from 'next-intl';
 import { getLocale, getMessages } from 'next-intl/server';
 import { Toaster } from 'sonner';
@@ -32,6 +33,7 @@ export default async function RootLayout({
           </div>
           <Toaster richColors closeButton />
         </NextIntlClientProvider>
+        <Analytics />
       </body>
     </html>
   );
