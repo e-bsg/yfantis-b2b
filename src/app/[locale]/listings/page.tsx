@@ -142,7 +142,7 @@ export default async function ListingsPage({
             return (
               <Link
                 key={listing.id}
-                href={`/profile/${listing.profile_id}`}
+                href={`/listings/${listing.id}`}
                 className="group rounded-xl border bg-card overflow-hidden hover:shadow-lg transition-all duration-200 flex flex-col"
               >
                 {/* Card Image with gradient overlay */}

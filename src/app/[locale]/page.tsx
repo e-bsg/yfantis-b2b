@@ -334,7 +334,7 @@ export default async function HomePage({ params }: Props) {
             {(listings || []).map((listing) => (
               <Link
                 key={listing.id}
-                href="/listings"
+                href={`/listings/${listing.id}`}
                 className={`group rounded-xl border border-l-4 bg-card overflow-hidden hover:shadow-lg hover:border-primary/30 transition-all duration-300 hover:-translate-y-0.5 ${listingBorderColor(listing.type)}`}
               >
                 {/* Card header with listing type badge overlay */}
