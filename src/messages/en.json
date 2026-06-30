@@ -123,7 +123,10 @@
     "confirm_block": "Block user?"
   },
   "catalog": {
-    "no_companies_hint": "No industrial companies match your criteria"
+    "no_companies_hint": "No industrial companies match your criteria",
+    "search_placeholder": "Search factories, products, services...",
+    "all_categories": "All",
+    "view_profile": "View Profile"
   },
   "home": {
     "hero_title": "Global Industrial B2B Directory",
@@ -136,6 +139,11 @@
     "step2_title": "Connect",
     "step2_desc": "Find factories, suppliers, and logistics partners globally",
     "step3_title": "Grow",
-    "step3_desc": "Expand your industrial network across borders"
+    "step3_desc": "Expand your industrial network across borders",
+    "stats_factories": "Industrial Companies",
+    "stats_countries": "Countries",
+    "stats_listings": "Active Listings",
+    "cta_register": "Register Your Company",
+    "cta_browse": "Browse Catalog"
   }
 }

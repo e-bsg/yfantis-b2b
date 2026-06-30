@@ -4,6 +4,8 @@ export type ListingType = 'job_offer' | 'job_seeking' | 'service';
 
 export type SubscriptionTier = 'free' | 'basic' | 'premium';
 
+export type Locale = 'en' | 'el' | 'it' | 'zh' | 'bg' | 'tr';
+
 export interface Profile {
   id: string;
   category: ProfileCategory;
@@ -34,13 +36,29 @@ export interface TransportDetails {
   has_adr: boolean;
 }
 
+export interface ListingImage {
+  id: string;
+  listing_id: string;
+  url: string;
+  alt: string;
+  sort_order: number;
+}
+
 export interface Listing {
   id: string;
   profile_id: string;
   title: string;
-  title_en: string | null;
+  title_el: string | null;
+  title_it: string | null;
+  title_zh: string | null;
+  title_bg: string | null;
+  title_tr: string | null;
   description: string;
-  description_en: string | null;
+  description_el: string | null;
+  description_it: string | null;
+  description_zh: string | null;
+  description_bg: string | null;
+  description_tr: string | null;
   type: ListingType;
   category: string;
   location: string | null;
@@ -51,6 +69,7 @@ export interface Listing {
   created_at: string;
   updated_at: string;
   profile?: Profile;
+  listing_images?: ListingImage[];
 }
 
 export interface Message {
