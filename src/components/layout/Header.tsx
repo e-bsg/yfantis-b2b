@@ -185,20 +185,27 @@ function LocaleSwitcher({ currentLocale, currentPath }: { currentLocale: string;
         <>
           <div className="fixed inset-0 z-40" onClick={() => setOpen(false)} />
           <div className="absolute right-0 top-full mt-2 z-50 min-w-[140px] rounded-md border bg-background p-1 shadow-lg">
-            {activeLocales.map((loc) => (
-              <Link
-                key={loc}
-                href={currentPath || '/'}
-                locale={loc}
-                onClick={() => setOpen(false)}
-                className={`flex items-center gap-2 rounded-sm px-3 py-2 text-sm hover:bg-accent ${
-                  loc === currentLocale ? 'font-medium text-primary' : 'text-muted-foreground'
-                }`}
-              >
-                {loc === currentLocale && <span className="text-xs">✓</span>}
-                <span className={loc === currentLocale ? '' : 'ml-4'}>{localeNames[loc]}</span>
-              </Link>
-            ))}
+            {activeLocales.map((loc) =>
+              loc === currentLocale ? (
+                <span
+                  key={loc}
+                  className="flex items-center gap-2 rounded-sm px-3 py-2 text-sm font-medium text-primary"
+                >
+                  <span className="text-xs">✓</span>
+                  <span>{localeNames[loc]}</span>
+                </span>
+              ) : (
+                <Link
+                  key={loc}
+                  href={currentPath || '/'}
+                  locale={loc}
+                  onClick={() => setOpen(false)}
+                  className="flex items-center gap-2 rounded-sm px-3 py-2 text-sm text-muted-foreground hover:bg-accent"
+                >
+                  <span className="ml-4">{localeNames[loc]}</span>
+                </Link>
+              )
+            )}
           </div>
         </>
       )}
