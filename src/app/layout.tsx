@@ -6,6 +6,7 @@ import { getLocale, getMessages } from 'next-intl/server';
 import { Toaster } from 'sonner';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 export const metadata: Metadata = {
   title: 'Yfantis — Global Industrial B2B Directory',
@@ -32,6 +33,7 @@ export default async function RootLayout({
           </div>
           <Toaster richColors closeButton />
         </NextIntlClientProvider>
+        <SpeedInsights />
       </body>
     </html>
   );
