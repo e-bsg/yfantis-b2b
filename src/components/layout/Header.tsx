@@ -117,18 +117,23 @@ export function Header() {
             ))}
             <hr />
             <div className="flex flex-wrap gap-2">
-              {activeLocales.map((loc) => (
-                <Link
-                  key={loc}
-                  href={pathname || '/'}
-                  locale={loc}
-                  onClick={() => setMobileOpen(false)}
-                  className={`rounded border px-3 py-1 text-xs ${
-                    loc === locale ? 'bg-primary text-primary-foreground border-primary' : 'hover:bg-accent'
-                  }`}
-                >
-                  {localeNames[loc]}
-                </Link>
+              {[locale, ...activeLocales.filter(l => l !== locale)].map((loc) => (
+                loc === locale ? (
+                  <span key={loc} className="rounded border px-3 py-1 text-xs bg-primary text-primary-foreground border-primary">
+                    {localeFlags[loc]} {localeCodes[loc]}
+                  </span>
+                ) : (
+                  <Link
+                    key={loc}
+                    href={pathname || '/'}
+                    locale={loc}
+                    onClick={() => setMobileOpen(false)}
+                    className="rounded border px-3 py-1 text-xs hover:bg-accent"
+                    title={localeNames[loc]}
+                  >
+                    {localeFlags[loc]} {localeCodes[loc]}
+                  </Link>
+                )
               ))}
             </div>
             {user ? (
@@ -158,40 +163,44 @@ export function Header() {
   );
 }
 
-const localeNames: Record<string, string> = {
-  en: 'English',
-  el: 'Ελληνικά',
-  it: 'Italiano',
-  zh: '中文',
-  bg: 'Български',
-  tr: 'Türkçe',
+const localeFlags: Record<string, string> = {
+  en: '🇬🇧', el: '🇬🇷', it: '🇮🇹', zh: '🇨🇳', bg: '🇧🇬', tr: '🇹🇷',
 };
-
+const localeNames: Record<string, string> = {
+  en: 'English', el: 'Ελληνικά', it: 'Italiano',
+  zh: '中文', bg: 'Български', tr: 'Türkçe',
+};
+const localeCodes: Record<string, string> = {
+  en: 'EN', el: 'EL', it: 'IT', zh: 'ZH', bg: 'BG', tr: 'TR',
+};
 const activeLocales = ['en', 'el', 'it'];
 
 function LocaleSwitcher({ currentLocale, currentPath }: { currentLocale: string; currentPath?: string }) {
   const [open, setOpen] = useState(false);
+  const sorted = [currentLocale, ...activeLocales.filter(l => l !== currentLocale)];
 
   return (
     <div className="relative">
       <button
         onClick={() => setOpen(!open)}
         className="flex items-center gap-1 text-sm text-muted-foreground hover:text-primary"
+        title={localeNames[currentLocale]}
       >
-        <Globe className="h-4 w-4" />
-        <span>{localeNames[currentLocale] || currentLocale.toUpperCase()}</span>
+        <span className="text-base">{localeFlags[currentLocale]}</span>
+        <span>{localeCodes[currentLocale]}</span>
       </button>
       {open && (
         <>
           <div className="fixed inset-0 z-40" onClick={() => setOpen(false)} />
-          <div className="absolute right-0 top-full mt-2 z-50 min-w-[140px] rounded-md border bg-background p-1 shadow-lg">
-            {activeLocales.map((loc) =>
+          <div className="absolute right-0 top-full mt-2 z-50 min-w-[170px] rounded-md border bg-background p-1 shadow-lg">
+            {sorted.map((loc) =>
               loc === currentLocale ? (
                 <span
                   key={loc}
                   className="flex items-center gap-2 rounded-sm px-3 py-2 text-sm font-medium text-primary"
                 >
                   <span className="text-xs">✓</span>
+                  <span className="text-base">{localeFlags[loc]}</span>
                   <span>{localeNames[loc]}</span>
                 </span>
               ) : (
@@ -201,8 +210,11 @@ function LocaleSwitcher({ currentLocale, currentPath }: { currentLocale: string;
                   locale={loc}
                   onClick={() => setOpen(false)}
                   className="flex items-center gap-2 rounded-sm px-3 py-2 text-sm text-muted-foreground hover:bg-accent"
+                  title={localeNames[loc]}
                 >
-                  <span className="ml-4">{localeNames[loc]}</span>
+                  <span className="text-xs opacity-0">✓</span>
+                  <span className="text-base">{localeFlags[loc]}</span>
+                  <span>{localeNames[loc]}</span>
                 </Link>
               )
             )}
